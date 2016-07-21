@@ -43,7 +43,6 @@ public class PlayerLogoutEventParser extends EventParser {
     @Override
     protected Status run(Matcher m) {
         String playerLogoutName = m.group("name");
-        wrapper.getLogger().debug("Player logout event: ".concat(playerLogoutName), this);
         getState().currentPlayers.remove(playerLogoutName);
         return Status.HANDLED;
     }

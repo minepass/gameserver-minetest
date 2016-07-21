@@ -39,7 +39,7 @@ public class PlayerLoginEventParser extends EventParser {
 
     @Override
     protected String getPatternString(String version) {
-        return "(?<name>[^ ]+).*joins game";
+        return "(?<name>[^ ]+).*joins game. List of players";
     }
 
     @Override
@@ -53,7 +53,6 @@ public class PlayerLoginEventParser extends EventParser {
         }
 
         String playerLoginName = m.group("name");
-        wrapper.getLogger().debug("Player login event: ".concat(playerLoginName), this);
         MPPlayer player = wrapper.getMinepass().getPlayerByName(playerLoginName);
 
         UUID playerUUID = null;

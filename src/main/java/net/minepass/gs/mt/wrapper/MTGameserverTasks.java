@@ -43,21 +43,19 @@ import java.util.UUID;
 public class MTGameserverTasks extends net.minepass.gs.GameserverTasks implements Runnable {
 
     private MP_MinetestWrapper wrapper;
-    private HashMap<UUID, String> currentPlayersTemp;
 
     public MTGameserverTasks(MP_MinetestWrapper wrapper) {
         super(wrapper.getMinepass());
         this.wrapper = wrapper;
-        this.currentPlayersTemp = new HashMap<>();
     }
 
     @Override
     protected Map<UUID, String> getCurrentPlayers() {
-        currentPlayersTemp.clear();
+        HashMap<UUID, String> currentPlayers = new HashMap<>();
         for (Map.Entry<String, UUID> entry : wrapper.getState().currentPlayers.entrySet()) {
-            currentPlayersTemp.put(entry.getValue(), entry.getKey());
+            currentPlayers.put(entry.getValue(), entry.getKey());
         }
-        return currentPlayersTemp;
+        return currentPlayers;
     }
 
     @Override
@@ -82,7 +80,10 @@ public class MTGameserverTasks extends net.minepass.gs.GameserverTasks implement
 
     @Override
     protected void warnPlayerPass(UUID playerId, String message) {
-        warnPlayer(playerId, message);
+        warnPlayer(
+                playerId,
+                message.concat(" Please signup at: ").concat(wrapper.getMinepass().getServer().join_url)
+        );
     }
 
     protected void sendCommands() {
