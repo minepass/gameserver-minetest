@@ -113,11 +113,11 @@ public class MinePassMT extends MinePass {
         StringBuffer s = new StringBuffer();
         for (MPPlayer p : server.players) {
             if (p.realm.equalsIgnoreCase("os")) {
-                s.append(getPlayerAuthTxt(p)).append("\n");
+                s.append(getPlayerAuthTxt(p));
             }
         }
         for (String name : server.bypass_players.keySet()) {
-            s.append(getPlayerAuthTxt(name, server.bypass_players.get(name))).append("\n");
+            s.append(getPlayerAuthTxt(name, server.bypass_players.get(name)));
         }
         return s.toString();
     }
@@ -138,15 +138,19 @@ public class MinePassMT extends MinePass {
             }
         }
 
-        return getPlayerAuthTxt(player.name, player.secret, privileges.toArray(new String[privileges.size()]));
+        if (privileges.size() > 0) {
+            return getPlayerAuthTxt(player.name, player.secret, privileges.toArray(new String[privileges.size()]));
+        } else {
+            return "";
+        }
     }
 
     protected String getPlayerAuthTxt(String name, String secret, String[] privileges) {
-        return String.join(":", name, secret, String.join(",", privileges));
+        return String.join(":", name, secret, String.join(",", privileges)) + "\n";
     }
 
     protected String getPlayerAuthTxt(String name, String identity) {
-        return String.join(":", name, identity);
+        return String.join(":", name, identity) + "\n";
     }
 
 }
