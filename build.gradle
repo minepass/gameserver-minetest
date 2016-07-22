@@ -49,7 +49,7 @@ repositories {
     }
 }
 
-version = "0.2.1" + "-" + (System.getenv("BUILD_NUMBER") ?: "SNAPSHOT")
+version = "0.2.2" + "-" + (System.getenv("BUILD_NUMBER") ?: "SNAPSHOT")
 group = "net.minepass"
 archivesBaseName = "MinePass-MinetestWrapper"
 mainClassName = "net.minepass.gs.mt.wrapper.MP_MinetestWrapper"

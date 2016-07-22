@@ -7,7 +7,7 @@ local operator = minetest.setting_get("name")
 local stepcount = 0
 
 minepass = {
-	version = "0.2.1",
+	version = "0.2.2",
 	modpath = modpath,
 	players = {},
 	command_sender = "SERVER",
